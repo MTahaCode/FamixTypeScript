@@ -44,7 +44,6 @@ I represent a TypeScript method.
 | `isAbstract` | `Boolean` | false | Entity can be declared abstract|
 | `isClassSide` | `Boolean` | false | Entity can be declared class side i.e. static|
 | `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
-| `kind` | `String` | nil | Tag indicating a setter, getter, constant method|
 | `name` | `String` | nil | Basic name of the entity, not full reference.|
 | `signature` | `String` | nil | Signature of the message being sent|
 | `visibility` | `String` | nil | Visibility of the entity|
@@ -53,8 +52,8 @@ I represent a TypeScript method.
 Class {
 	#name : 'FamixTypeScriptMethod',
 	#superclass : 'FamixTypeScriptBehaviouralEntity',
-	#traits : 'FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTHasKind + FamixTHasVisibility + FamixTImportable + FamixTMethod',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTHasKind classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTMethod classTrait',
+	#traits : 'FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTHasVisibility + FamixTImportable + FamixTMethod',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTMethod classTrait',
 	#category : 'Famix-TypeScript-Entities-Entities',
 	#package : 'Famix-TypeScript-Entities',
 	#tag : 'Entities'

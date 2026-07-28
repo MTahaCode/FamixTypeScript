@@ -326,7 +326,7 @@ FamixTypeScriptGenerator >> defineHierarchy [
 	method --|> #TMethod.
 	method --|> #TCanBeAbstract.
 	"method --|> #THasKind."
-	method inheritsFromTrait: #THasKind without: #isConstructor.
+	"method inheritsFromTrait: #THasKind without: #isConstructor."
 	method --|> #THasVisibility.
 	method --|> #TCanBeClassSide.
 	method --|> #TImportable.
