@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTypeScriptGenerator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixTypeScriptGenerator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'access',
 		'class',
@@ -46,28 +46,29 @@ Class {
 		'concretization',
 		'parameterConcretization'
 	],
-	#category : #'Famix-TypeScript-Generator'
+	#category : 'Famix-TypeScript-Generator',
+	#package : 'Famix-TypeScript-Generator'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeScriptGenerator class >> packageName [
 
 		^ #'Famix-TypeScript-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeScriptGenerator class >> packageNameForAnnotations [
 
 	^ #'FamixTypeScript'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeScriptGenerator class >> prefix [
 
 	^ #'FamixTypeScript'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeScriptGenerator class >> translationDictionary [
 
 	| classNames associations |
@@ -79,7 +80,7 @@ FamixTypeScriptGenerator class >> translationDictionary [
 	^ Dictionary newFrom: associations.	
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixTypeScriptGenerator >> commentForConcretization [
 	"To verify"
 	^ '## Relations
@@ -113,7 +114,7 @@ FamixTypeScriptGenerator >> commentForConcretization [
 '
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixTypeScriptGenerator >> commentForParameterConcretization [
 	^ '## Relations
 ======================
@@ -146,7 +147,7 @@ FamixTypeScriptGenerator >> commentForParameterConcretization [
 '
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixTypeScriptGenerator >> commentForTCanBeInterface [
 	^ 'I allow an entity to be an interface abstraction
 ex:
@@ -158,13 +159,13 @@ public interface Flyable {
 ```'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTypeScriptGenerator >> commentForTWithInterfaces [
 
 ^ 'I can contain interfaces (Packages, Methods, Classes...)'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTypeScriptGenerator >> defineClasses [
 
 	super defineClasses.
@@ -206,7 +207,6 @@ FamixTypeScriptGenerator >> defineClasses [
 	namespace := builder newClassNamed: #Namespace.
 	parameter := builder newClassNamed: #Parameter.
 	parametricClass := builder newClassNamed: #ParametricClass.
-	parameterConcretization := builder newClassNamed: #ParameterConcretization  comment: self commentForParameterConcretization. 
 	parametricInterface := builder newClassNamed: #ParametricInterface.
 	parameterType := builder newClassNamed: #ParameterType.
 	primitiveType := builder newClassNamed: #PrimitiveType comment: 'I represent a TypeScript primitive type (string, number, boolean).'.
@@ -221,7 +221,7 @@ FamixTypeScriptGenerator >> defineClasses [
 	"self defineComments."
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTypeScriptGenerator >> defineHierarchy [
 
 	super defineHierarchy.
@@ -354,8 +354,9 @@ FamixTypeScriptGenerator >> defineHierarchy [
 	parameter --|> #TParameter.
 
 	parameterType --|> type.
-	parameterType --|> #TGenericParameterType.
-	parameterType --|> #TTypedEntity.
+	parameterType --|> #TTypeParameter.
+	parameterType --|> #TTypeArgument.
+	parameterType --|> #TWithInheritances.
 	
 	parametricClass --|> class.
 	"parameterizableClass --|> #TWithParameterizedTypes."
@@ -378,13 +379,8 @@ FamixTypeScriptGenerator >> defineHierarchy [
 	primitiveType --|> #TPrimitiveType.
 	
 	sourcedEntity --|> #TWithComments.
-	
-	type --|> #TConcreteParameterType.
-	type --|> containerEntity.
 
 	concretization --|> #TConcretization.
-
-	parameterConcretization --|> #TParameterConcretization.
 
 	property --|> structuralEntity.
 	property --|> #TAttribute.
@@ -404,6 +400,7 @@ FamixTypeScriptGenerator >> defineHierarchy [
 	tWithInterfaces --|> #TWithTypes.
 
 	type --|> containerEntity.
+	type --|> #TTypeArgument.
 	type --|> #TType.
 	"type --|> #TParameterizedTypeUser."
 	type --|> #TWithMethods.
@@ -412,11 +409,9 @@ FamixTypeScriptGenerator >> defineHierarchy [
 	variable --|> structuralEntity.
 	variable --|> #TLocalVariable.
 	variable --|> #TImportable.
-
-	parameterType --|> #TWithInheritances.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTypeScriptGenerator >> defineProperties [
 
 	super defineProperties.
@@ -444,13 +439,13 @@ FamixTypeScriptGenerator >> defineProperties [
 		comment: 'Method is a setter'"
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTypeScriptGenerator >> defineRelations [
     super defineRelations.
 	(decorator property: #decoratedEntity) *- (namedEntity  property: #decorators).
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTypeScriptGenerator >> defineTraits [ 
 
 	super defineTraits.
@@ -460,7 +455,7 @@ FamixTypeScriptGenerator >> defineTraits [
 	tTypeScriptClassMetrics := builder newTraitNamed: #TClassMetrics.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTypeScriptGenerator >> newBuilder [
 
 	^ super newBuilder
